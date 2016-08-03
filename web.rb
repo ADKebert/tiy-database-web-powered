@@ -74,12 +74,12 @@ end
 
 class SearchPerson < WEBrick::HTTPServlet::AbstractServlet
   def do_GET(request, response)
-    name = "" # <<== replace this with getting the name from the request
+    name = request.query["name"] # <<== replace this with getting the name from the request
 
     # Find the person (you figure out what method to call, some_method_here is wrong)
-    person = $database.some_method_here(name)
+    person = $database.search(name)
 
-    erb_template_string = File.read("search-results.html.erb")
+    erb_template_string = File.read("search-result.html.erb")
     template = ERB.new(erb_template_string)
     output   = template.result(binding)
 
