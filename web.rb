@@ -35,14 +35,20 @@ class AddPerson < WEBrick::HTTPServlet::AbstractServlet
     name = request.query["name"]
     phone_number = request.query["phone_number"]
     # You do the rest here
-    address = ""
-    position = ""
-    salary = ""
-    slack_account = ""
-    github_account = ""
-
+    address = request.query["address"]
+    position = request.query["position"]
+    salary = request.query["salary"]
+    slack_account = request.query["slack_account"]
+    github_account = request.query["github_account"]
+    p request.query
     # Add the person
-    # person = $database.SOME_METHOD_HERE
+    person = $database.add(name,
+                           phone_number,
+                           address,
+                           position,
+                           salary,
+                           slack_account,
+                           github_account)
 
     erb_template_string = File.read("added.html.erb")
     template = ERB.new(erb_template_string)
