@@ -120,6 +120,20 @@ class RemovePerson < WEBrick::HTTPServlet::AbstractServlet
   end
 end
 
+class Report < WEBrick::HTTPServlet::AbstractServlet
+  def do_GET(request, response)
+    people = $database.people
+
+    erb_template_string = File.read("report.html.erb")
+    template = ERB.new(erb_template_string)
+    output   = template.result(binding)
+
+    response.body = output
+    response.content_type = "text/html"
+    response.status = 200
+  end
+end
+
 server = WEBrick::HTTPServer.new(Port: 3000)
 server.mount "/", HomePage
 server.mount "/prompt-to-add", PromptToAddPerson
@@ -131,4 +145,6 @@ server.mount "/search", SearchPerson
 # See if you can implement delete!!!
 server.mount "/prompt-to-remove", PromptToRemovePerson
 server.mount "/remove", RemovePerson
+
+server.mount "/report", Report
 server.start

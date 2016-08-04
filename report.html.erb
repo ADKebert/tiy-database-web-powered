@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Added a Person</title>
+  </head>
+  <body>
+    <h1>Here are our employees:</h1>
+
+    <% people.each do |person| %>
+    <ul>
+      <li>Name: <%= person.name %></li>
+      <li>Address: <%= person.address %></li>
+      <li>Phone Number: <%= person.phone_number %></li>
+      <li>Position: <%= person.position %></li>
+      <li>Salary: <%= person.salary %></li>
+      <li>Slack Account: <%= person.slack_account %></li>
+      <li>Github Account: <%= person.github_account %></li>
+    </ul>
+    <% end %>
+  </body>
+</html>
